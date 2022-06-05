@@ -36,7 +36,7 @@ public class ChatListener extends ListenerAdapter {
             }
             System.out.println(playerList.get(0));
             System.out.println();
-            for(String data: playerList) {
+            for (String data : playerList) {
                 System.out.println(data);
             }
         } catch (IOException e) {
