@@ -1,5 +1,6 @@
-package blossom;
+package Blossom.Listener;
 
+import Blossom.Item.PlayerItem;
 import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -9,8 +10,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Discord Message Listener
@@ -22,7 +22,7 @@ public class ChatListener extends ListenerAdapter {
 
     String url = "http://clubblossom.site/blossom";
     BufferedReader player;
-    List<String> playerList = new ArrayList<>();
+    List<PlayerItem> playerItems = new ArrayList<>();
 
     {
         try {
@@ -32,13 +32,14 @@ public class ChatListener extends ListenerAdapter {
                 if (item == null) {
                     break;
                 }
-                playerList.add(item);
+                String[] info = item.split("\t");
+                playerItems.add(new PlayerItem(info[0], info[1],
+                        info[2], info[3], info[4], info[5],
+                        info[6], info[7], info[8], info[9],
+                        info[10], info[11]));
             }
-            System.out.println(playerList.get(0));
-            System.out.println();
-            for (String data : playerList) {
-                System.out.println(data);
-            }
+
+            System.out.println(playerItems.get(0).getName());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -73,6 +74,24 @@ public class ChatListener extends ListenerAdapter {
             event.getChannel().sendMessage("레티 똑똑 " + event.getAuthor().getAsMention()).queue();
         }
 
+        if (event.getMessage().getContentRaw().charAt(0) == '/') {
+            String[] args = event.getMessage().getContentRaw().substring(1).split(" ");
 
+            if (args.length <= 0) return;
+            if (args[0].equalsIgnoreCase("player") || args[0].equalsIgnoreCase("p")) {
+
+
+                if (args.length < 2) return; // 모든 플레이어 리스트
+                else {
+                    int point = playerItems.indexOf(new PlayerItem(null, args[1], null,
+                            null, null, null, null, null,
+                            null, null, null, null));
+
+                    System.out.println(args[1]);
+                    System.out.println(playerItems.get(point).getName());
+                    event.getChannel().sendMessage("와 샌즈! : " + playerItems.get(point).getName()).queue();
+                }
+            }
+        }
     }
 }
