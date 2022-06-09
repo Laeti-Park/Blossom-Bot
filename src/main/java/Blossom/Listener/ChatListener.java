@@ -80,8 +80,9 @@ public class ChatListener extends ListenerAdapter {
             if (args.length <= 0) return;
             if (args[0].equalsIgnoreCase("player") || args[0].equalsIgnoreCase("p")) {
 
-
-                if (args.length < 2) return; // 모든 플레이어 리스트
+                if (args.length < 2) {
+                    System.out.println("Hi");
+                }
                 else {
                     int point = playerItems.indexOf(new PlayerItem(null, args[1], null,
                             null, null, null, null, null,
@@ -89,7 +90,7 @@ public class ChatListener extends ListenerAdapter {
 
                     System.out.println(args[1]);
                     System.out.println(playerItems.get(point).getName());
-                    event.getChannel().sendMessage("와 샌즈! : " + playerItems.get(point).getName()).queue();
+                    event.getChannel().sendMessage("와 샌즈! : " + playerItems.get(point).getName() + "\n" + playerItems.get(point).getMaxTrophy()).queue();
                 }
             }
         }
