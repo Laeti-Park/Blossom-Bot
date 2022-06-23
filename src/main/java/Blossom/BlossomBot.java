@@ -18,7 +18,6 @@ import com.oracle.bmc.auth.AuthenticationDetailsProvider;
 import com.oracle.bmc.auth.ConfigFileAuthenticationDetailsProvider;
 import com.oracle.bmc.objectstorage.ObjectStorage;
 import com.oracle.bmc.objectstorage.ObjectStorageClient;
-import com.oracle.bmc.requests.BmcRequest;
 
 public class BlossomBot implements EventListener {
 
@@ -27,7 +26,7 @@ public class BlossomBot implements EventListener {
 
     public static void main(String[] args) throws LoginException, IOException {
 
-        String configurationFilePath = "~/home/ubuntu/.oci/config";
+        String configurationFilePath = "~/.oci/config";
         String profile = "DEFAULT";
 
         AuthenticationDetailsProvider provider =

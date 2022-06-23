@@ -2,8 +2,8 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="996ac458-7f58-4d4a-ac58-80369b0139d2" name="Blossom-Discord" url="http://152.67.212.57">
-        <fileTransfer rootFolder="/home/ubuntu/Blossom-Bot" accessType="SFTP" host="152.67.212.57" port="22" sshConfigId="3d779fb1-eea4-4bba-83ee-29ef0fc8b855" sshConfig="ubuntu@152.67.212.57:22 key" keyPair="true">
+      <webServer id="3d162ba6-338b-4375-be4c-5295413a79b0" name="Blossom-Discord" url="152.67.212.57">
+        <fileTransfer rootFolder="/home/ubuntu" accessType="SFTP" host="152.67.212.57" port="22" sshConfigId="a322d956-7c85-4fc2-a74d-520e34ab222c" sshConfig="ubuntu@152.67.212.57:22:22 key" keyPair="true">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
