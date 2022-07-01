@@ -1,18 +1,18 @@
 package Blossom.Item;
 
 public class PlayerItem {
-    private String tag;
-    private String name;
-    private String nowTrophy;
-    private String maxTrophy;
-    private String exp;
-    private String tripleMode;
-    private String soloMode;
-    private String duoMode;
-    private String rank25;
-    private String rank30;
-    private String rank35;
-    private String club;
+    private final String tag;
+    private final String name;
+    private final String nowTrophy;
+    private final String maxTrophy;
+    private final String exp;
+    private final String tripleMode;
+    private final String soloMode;
+    private final String duoMode;
+    private final String rank25;
+    private final String rank30;
+    private final String rank35;
+    private final String club;
 
     public PlayerItem(String tag, String name,
                       String nowTrophy, String maxTrophy,
@@ -84,10 +84,6 @@ public class PlayerItem {
     public boolean equals(Object obj) {
         PlayerItem input = (PlayerItem) obj;
 
-        if (input.name.matches(".*" + this.name + ".*")) {
-            return true;
-        } else {
-            return false;
-        }
+        return input.name.matches(".*" + this.name + ".*");
     }
 }

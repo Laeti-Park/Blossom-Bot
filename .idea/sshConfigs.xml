@@ -2,7 +2,7 @@
 <project version="4">
   <component name="SshConfigs">
     <configs>
-      <sshConfig host="152.67.212.57" id="a322d956-7c85-4fc2-a74d-520e34ab222c" keyPath="C:\Users\Laeti\Documents\PortFolio\Blossom-Bot\laeti.ppk" localPort="22" port="22" nameFormat="DESCRIPTIVE" username="ubuntu" useOpenSSHConfig="true" />
+      <sshConfig host="152.69.229.122" id="a322d956-7c85-4fc2-a74d-520e34ab222c" keyPath="C:\Users\Laeti\Documents\PortFolio\Blossom-Bot\laeti.ppk" localPort="22" port="22" nameFormat="DESCRIPTIVE" username="ubuntu" useOpenSSHConfig="true" />
     </configs>
   </component>
 </project>
