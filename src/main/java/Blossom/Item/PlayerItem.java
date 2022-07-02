@@ -84,6 +84,6 @@ public class PlayerItem {
     public boolean equals(Object obj) {
         PlayerItem input = (PlayerItem) obj;
 
-        return input.name.matches(".*" + this.name + ".*");
+        return input.name.matches(".*(?i)" + this.name + ".*");
     }
 }
