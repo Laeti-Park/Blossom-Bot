@@ -3,6 +3,7 @@ package Blossom.Listener;
 import Blossom.Item.BrawlerItem;
 import Blossom.Item.PlayerItem;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.guild.GuildReadyEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -67,6 +68,7 @@ public class CommandListener extends ListenerAdapter {
     public void onSlashCommandInteraction(@NotNull SlashCommandInteractionEvent event) {
         String slashCommand = event.getName();
         EmbedBuilder embed = new EmbedBuilder();
+        File botIcon = new File("./img/Blossom_Discord_Icon.png");
 
         // 프로필 명령어 : 플레이어 프로필 정보 검색
         if (slashCommand.equals("프로필")) {
@@ -87,49 +89,69 @@ public class CommandListener extends ListenerAdapter {
             embed.setTitle("프로필 닉네임\n" + playerItems.get(point).getName(),
                     "https://brawlstats.com/profile/"
                             + playerItems.get(point).getTag().replace("#", ""));
-            embed.addField("플레이어 태그", playerItems.get(point).getTag(), false);
-            embed.addField("현재 트로피", playerItems.get(point).getNowTrophy(), true);
-            embed.addField("최대 트로피", playerItems.get(point).getMaxTrophy(), true);
+            embed.addField("플레이어 태그",
+                    "`" + playerItems.get(point).getTag() + "`", false);
+            embed.addField("현재 트로피",
+                    "`" + playerItems.get(point).getNowTrophy() + "`", true);
+            embed.addField("최대 트로피",
+                    "`" + playerItems.get(point).getMaxTrophy() + "`", true);
             embed.addBlankField(true);
-            embed.addField("3대3 승리", playerItems.get(point).getTripleMode(), true);
-            embed.addField("듀오 승리", playerItems.get(point).getDuoMode(), true);
-            embed.addField("솔로 승리", playerItems.get(point).getSoloMode(), true);
-            embed.addField("25랭크", playerItems.get(point).getRank25() + "개", true);
-            embed.addField("30랭크", playerItems.get(point).getRank30() + "개", true);
-            embed.addField("35랭크", playerItems.get(point).getRank35() + "개", true);
+            embed.addField("3대3 승리",
+                    "`" + playerItems.get(point).getTripleMode() + "`", true);
+            embed.addField("듀오 승리",
+                    "`" + playerItems.get(point).getDuoMode() + "`", true);
+            embed.addField("솔로 승리",
+                    "`" + playerItems.get(point).getSoloMode() + "`", true);
+            embed.addField("25랭크",
+                    "`" + playerItems.get(point).getRank25() + "개" + "`", true);
+            embed.addField("30랭크",
+                    "`" + playerItems.get(point).getRank30() + "개" + "`", true);
+            embed.addField("35랭크",
+                    "`" + playerItems.get(point).getRank35() + "개" + "`", true);
+            embed.setFooter("Blossom-Bot",
+                    "attachment://Blossom_Discord_Icon.png");
 
             embed.setColor(Color.decode(clubColor));
             event.replyEmbeds(embed.build())
-                    .addFile(clubIcon, "BlossomClub.png").queue();
+                    .addFile(clubIcon, "BlossomClub.png")
+                    .addFile(botIcon, "Blossom_Discord_Icon.png")
+                    .queue();
         }
 
         // 랜덤 브롤러 : 랜덤 브롤러 선택
-        if (slashCommand.equals("돌림판")) {
+        if (slashCommand.equals("뽑기")) {
             int randomNum = (int) (Math.random() * 57 + 1);
             File randomImage = new File("./img/Brawler/Brawler_" + randomNum + ".png");
 
             System.out.println("[" + tag + " Log] : " + "돌림판 번호/" + randomNum);
 
-            embed.setTitle("\uD83D\uDEDE돌려돌려 돌림판\uD83D\uDEDE");
+            embed.setTitle("랜덤 브롤러 뽑기");
             embed.setThumbnail("attachment://Brawler_Random.png");
-            embed.addField("돌림판의 브롤러는?!",
-                    brawlerItem.brawler[randomNum - 1], false);
+            embed.addField("뽑기 결과",
+                    "`" + brawlerItem.brawler[randomNum - 1] + "`", false);
+            embed.setFooter("Blossom-Bot", "attachment://Blossom_Discord_Icon.png");
+
             event.replyEmbeds(embed.build())
-                    .addFile(randomImage, "Brawler_Random.png").queue();
+                    .addFile(randomImage, "Brawler_Random.png")
+                    .addFile(botIcon, "Blossom_Discord_Icon.png")
+                    .queue();
         }
 
         // 문의 : 오류 및 기능 추가 문의
         if (slashCommand.equals("문의")) {
             File botLogo = new File("./img/Blossom_Discord_Logo.png");
 
-            embed.setThumbnail("attachment://Blossom_Discord_Logo.png");
-            embed.addField("카카오톡 문의", "https://open.kakao.com/me/Laeti_Cre\n" +
-                    "오류가 발생하거나 추가하고 싶은 기능이 있으면 문의주세요!", false);
-            embed.setFooter("블라썸 봇 개발 문의", "attachment://Blossom_Discord_Logo.png");
+            embed.setImage("attachment://Blossom_Discord_Logo.png");
+            embed.setTitle("Developed by Laeti", "https://open.kakao.com/me/Laeti_Cre");
+            embed.addField("오류 및 추가 기능 문의",
+                    "이메일 : `creator98@naver.com`\n" + "디스코드 : `박동훈#0268`", false);
+            embed.setFooter("Blossom-Bot", "attachment://Blossom_Discord_Icon.png");
 
             embed.setColor(Color.decode("#E56AA6"));
             event.replyEmbeds(embed.build())
-                    .addFile(botLogo, "Blossom_Discord_Logo.png").queue();
+                    .addFile(botLogo, "Blossom_Discord_Logo.png")
+                    .addFile(botIcon, "Blossom_Discord_Icon.png")
+                    .queue();
         }
     }
 
@@ -139,7 +161,7 @@ public class CommandListener extends ListenerAdapter {
         commandData.add(Commands.slash("프로필", "플레이어 프로필 정보 검색")
                 .addOption(OptionType.STRING, "닉네임", "인게임 닉네임 일부를 입력"));
         commandData.add(Commands.slash("문의", "오류 및 기능 추가 문의"));
-        commandData.add(Commands.slash("돌림판", "돌려돌려 돌림판\uD83D\uDE35\u200D\uD83D\uDCAB"));
+        commandData.add(Commands.slash("뽑기", "랜덤 브롤러 뽑기"));
 
         if (event.getGuild().getIdLong() == 656733677270597662L) {
             event.getGuild().updateCommands().addCommands(commandData).queue();
