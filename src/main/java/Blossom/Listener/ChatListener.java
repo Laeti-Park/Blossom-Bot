@@ -31,9 +31,8 @@ public class ChatListener extends ListenerAdapter {
                     event.getMessage().getContentDisplay());
         }
 
-        // 메시지가 봇일 경우
         if (event.getAuthor().isBot()) {
-            return;
+            // 메시지가 봇일 경우
         }
     }
 }

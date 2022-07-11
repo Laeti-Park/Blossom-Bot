@@ -1,5 +1,6 @@
 package Blossom;
 
+import Blossom.Listener.ButtonListener;
 import Blossom.Listener.ChatListener;
 import Blossom.Listener.CommandListener;
 import com.oracle.bmc.Region;
@@ -43,7 +44,7 @@ public class BlossomBot implements EventListener {
 
         String token = tokenFile.readLine();
         jda = JDABuilder.createDefault(token).addEventListeners(new Blossom.BlossomBot()).build();
-        jda.addEventListener(new ChatListener(), new CommandListener());
+        jda.addEventListener(new ChatListener(), new CommandListener(), new ButtonListener());
     }
 
     @Override

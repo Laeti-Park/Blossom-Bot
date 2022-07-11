@@ -3,7 +3,6 @@ package Blossom.Listener;
 import Blossom.Item.BrawlerItem;
 import Blossom.Item.PlayerItem;
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.dv8tion.jda.api.entities.MessageEmbed;
 import net.dv8tion.jda.api.events.guild.GuildReadyEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -11,6 +10,7 @@ import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
+import net.dv8tion.jda.api.interactions.components.buttons.Button;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -21,6 +21,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Command Listener
@@ -73,7 +74,7 @@ public class CommandListener extends ListenerAdapter {
         // 프로필 명령어 : 플레이어 프로필 정보 검색
         if (slashCommand.equals("프로필")) {
             OptionMapping statOption = event.getOption("닉네임");
-            String statName = statOption.getAsString();
+            String statName = Objects.requireNonNull(statOption).getAsString();
 
             int point = playerItems.indexOf(new PlayerItem(null, statName, null,
                     null, null, null, null, null,
@@ -113,6 +114,13 @@ public class CommandListener extends ListenerAdapter {
 
             embed.setColor(Color.decode(clubColor));
             event.replyEmbeds(embed.build())
+                    .addActionRow(
+                            Button.link("https://brawlstats.com/profile/" +
+                                            playerItems.get(point).getTag().replace("#", ""),
+                                    "Brawl Stats"),
+                            Button.link("https://brawlify.com/kr/stats/profile/" +
+                                            playerItems.get(point).getTag().replace("#", ""),
+                                    "Brawlify"))
                     .addFile(clubIcon, "BlossomClub.png")
                     .addFile(botIcon, "Blossom_Discord_Icon.png")
                     .queue();
