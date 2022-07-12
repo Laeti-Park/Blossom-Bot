@@ -1,5 +1,7 @@
 package Blossom.Item;
 
+import java.text.Normalizer;
+
 public class PlayerItem {
     private final String tag;
     private final String name;
@@ -84,6 +86,7 @@ public class PlayerItem {
     public boolean equals(Object obj) {
         PlayerItem input = (PlayerItem) obj;
 
-        return input.name.matches(".*(?i)" + this.name + ".*");
+        return Normalizer.normalize(input.name, Normalizer.Form.NFKC)
+                .matches(".*(?i)" + this.name + ".*");
     }
 }
